@@ -5,11 +5,11 @@ namespace EFCoreIssues {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
-            Refresh();
+            LoadData();
         }
         EFCoreIssues.Issues.IssuesContext _Context;
 
-        void Refresh() {
+        void LoadData() {
             _Context = new EFCoreIssues.Issues.IssuesContext();
             grid.ItemsSource = _Context.Users.ToList();
         }
