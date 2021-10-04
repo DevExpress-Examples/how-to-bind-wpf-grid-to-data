@@ -12,6 +12,7 @@ Class MainWindow
         AddHandler source.FetchRows, AddressOf OnFetchRows
         AddHandler source.GetTotalSummaries, AddressOf OnGetTotalSummaries
         grid.ItemsSource = source
+        LoadLookupData()
     End Sub
 
     Private Sub OnFetchRows(ByVal sender As System.Object, ByVal e As DevExpress.Xpf.Data.FetchRowsAsyncEventArgs)
@@ -34,5 +35,13 @@ Class MainWindow
         Dim converter = New DevExpress.Xpf.Data.GridFilterCriteriaToExpressionConverter(Of EFCoreIssues.Issues.Issue)()
         Return converter.Convert(filter)
     End Function
+
+    Private Sub LoadLookupData()
+        Dim context = New EFCoreIssues.Issues.IssuesContext()
+        usersLookup.ItemsSource = context.Users.[Select](Function(user) New With {
+            .Id = user.Id,
+            .Name = user.FirstName & " " + user.LastName
+        }).ToArray()
+    End Sub
 
 End Class

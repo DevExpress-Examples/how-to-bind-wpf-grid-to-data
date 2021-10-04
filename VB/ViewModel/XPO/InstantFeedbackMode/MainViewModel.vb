@@ -25,5 +25,19 @@ Public Class MainViewModel
             Return _InstantFeedbackSource
         End Get
     End Property
+    Private _Users As System.Collections.IList
+
+    Public ReadOnly Property Users As System.Collections.IList
+        Get
+            If _Users Is Nothing AndAlso Not IsInDesignMode Then
+                Dim session = New DevExpress.Xpo.Session()
+                _Users = session.Query(Of XPOIssues.Issues.User).OrderBy(Function(user) user.Oid).[Select](Function(user) New With {
+                    .Id = user.Oid,
+                    .Name = user.FirstName & " " + user.LastName
+                }).ToArray()
+            End If
+            Return _Users
+        End Get
+    End Property
 
 End Class

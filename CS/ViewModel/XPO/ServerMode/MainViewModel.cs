@@ -28,5 +28,20 @@ new DevExpress.Xpo.ServerViewProperty("Priority", DevExpress.Xpo.SortDirection.N
                 return _ServerModeSource;
             }
         }
+        System.Collections.IList _Users;
+
+        public System.Collections.IList Users
+        {
+            get
+            {
+                if(_Users == null && !IsInDesignMode) {
+                    {
+                        var session = new DevExpress.Xpo.Session();
+                        _Users = session.Query<XPOIssues.Issues.User>().OrderBy(user => user.Oid).Select(user => new { Id = user.Oid, Name = user.FirstName + " " + user.LastName }).ToArray();
+                    }
+                }
+                return _Users;
+            }
+        }
     }
 }

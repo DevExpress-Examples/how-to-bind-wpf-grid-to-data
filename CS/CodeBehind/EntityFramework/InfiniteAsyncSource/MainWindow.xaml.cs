@@ -16,6 +16,7 @@ namespace EntityFrameworkIssues {
             source.FetchRows += OnFetchRows;
             source.GetTotalSummaries += OnGetTotalSummaries;
             grid.ItemsSource = source;
+            LoadLookupData();
         }
 
         void OnFetchRows(System.Object sender, DevExpress.Xpf.Data.FetchRowsAsyncEventArgs e) {
@@ -41,6 +42,11 @@ namespace EntityFrameworkIssues {
         System.Linq.Expressions.Expression<System.Func<EntityFrameworkIssues.Issues.Issue, bool>> MakeFilterExpression(DevExpress.Data.Filtering.CriteriaOperator filter) {
             var converter = new DevExpress.Xpf.Data.GridFilterCriteriaToExpressionConverter<EntityFrameworkIssues.Issues.Issue>();
             return converter.Convert(filter);
+        }
+
+        void LoadLookupData() {
+            var context = new EntityFrameworkIssues.Issues.IssuesContext();
+            usersLookup.ItemsSource = context.Users.Select(user => new { Id = user.Id, Name = user.FirstName + " " + user.LastName }).ToArray();
         }
     }
 }

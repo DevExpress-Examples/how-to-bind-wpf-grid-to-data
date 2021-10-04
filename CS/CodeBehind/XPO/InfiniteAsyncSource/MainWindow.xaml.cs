@@ -24,6 +24,7 @@ namespace XPOIssues {
             source.FetchRows += OnFetchRows;
             source.GetTotalSummaries += OnGetTotalSummaries;
             grid.ItemsSource = source;
+            LoadLookupData();
         }
         DetachedObjectsHelper<XPOIssues.Issues.Issue> _DetachedObjectsHelper;
 
@@ -50,6 +51,11 @@ namespace XPOIssues {
         System.Linq.Expressions.Expression<System.Func<XPOIssues.Issues.Issue, bool>> MakeFilterExpression(DevExpress.Data.Filtering.CriteriaOperator filter) {
             var converter = new DevExpress.Xpf.Data.GridFilterCriteriaToExpressionConverter<XPOIssues.Issues.Issue>();
             return converter.Convert(filter);
+        }
+
+        void LoadLookupData() {
+            var session = new DevExpress.Xpo.Session();
+            usersLookup.ItemsSource = session.Query<XPOIssues.Issues.User>().OrderBy(user => user.Oid).Select(user => new { Id = user.Oid, Name = user.FirstName + " " + user.LastName }).ToArray();
         }
     }
 }

@@ -26,5 +26,18 @@ namespace EFCoreIssues {
                 return _InstantFeedbackSource;
             }
         }
+        System.Collections.IList _Users;
+
+        public System.Collections.IList Users
+        {
+            get
+            {
+                if(_Users == null && !IsInDesignMode) {
+                    var context = new EFCoreIssues.Issues.IssuesContext();
+                    _Users = context.Users.Select(user => new { Id = user.Id, Name = user.FirstName + " " + user.LastName }).ToArray();
+                }
+                return _Users;
+            }
+        }
     }
 }

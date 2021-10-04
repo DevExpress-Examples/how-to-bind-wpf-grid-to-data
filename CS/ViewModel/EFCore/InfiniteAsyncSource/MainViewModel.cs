@@ -31,5 +31,18 @@ namespace EFCoreIssues {
             var converter = new DevExpress.Xpf.Data.GridFilterCriteriaToExpressionConverter<EFCoreIssues.Issues.Issue>();
             return converter.Convert(filter);
         }
+        System.Collections.IList _Users;
+
+        public System.Collections.IList Users
+        {
+            get
+            {
+                if(_Users == null && !IsInDesignMode) {
+                    var context = new EFCoreIssues.Issues.IssuesContext();
+                    _Users = context.Users.Select(user => new { Id = user.Id, Name = user.FirstName + " " + user.LastName }).ToArray();
+                }
+                return _Users;
+            }
+        }
     }
 }

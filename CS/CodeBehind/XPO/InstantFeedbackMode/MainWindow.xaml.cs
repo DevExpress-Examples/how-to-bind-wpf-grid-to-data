@@ -22,6 +22,12 @@ new DevExpress.Xpo.ServerViewProperty("Priority", DevExpress.Xpo.SortDirection.N
                 e.Session = new DevExpress.Xpo.Session();
             };
             grid.ItemsSource = source;
+            LoadLookupData();
+        }
+
+        void LoadLookupData() {
+            var session = new DevExpress.Xpo.Session();
+            usersLookup.ItemsSource = session.Query<XPOIssues.Issues.User>().OrderBy(user => user.Oid).Select(user => new { Id = user.Oid, Name = user.FirstName + " " + user.LastName }).ToArray();
         }
     }
 }

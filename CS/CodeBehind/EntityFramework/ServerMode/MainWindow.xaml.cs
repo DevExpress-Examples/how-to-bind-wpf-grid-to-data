@@ -15,6 +15,12 @@ namespace EntityFrameworkIssues {
                 QueryableSource = context.Issues.AsNoTracking()
             };
             grid.ItemsSource = source;
+            LoadLookupData();
+        }
+
+        void LoadLookupData() {
+            var context = new EntityFrameworkIssues.Issues.IssuesContext();
+            usersLookup.ItemsSource = context.Users.Select(user => new { Id = user.Id, Name = user.FirstName + " " + user.LastName }).ToArray();
         }
     }
 }

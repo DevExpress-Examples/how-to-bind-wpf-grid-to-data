@@ -17,6 +17,7 @@ namespace EFCoreIssues {
             source.FetchPage += OnFetchPage;
             source.GetTotalSummaries += OnGetTotalSummaries;
             grid.ItemsSource = source;
+            LoadLookupData();
         }
 
         void OnFetchPage(System.Object sender, DevExpress.Xpf.Data.FetchPageAsyncEventArgs e) {
@@ -43,6 +44,11 @@ namespace EFCoreIssues {
         System.Linq.Expressions.Expression<System.Func<EFCoreIssues.Issues.Issue, bool>> MakeFilterExpression(DevExpress.Data.Filtering.CriteriaOperator filter) {
             var converter = new DevExpress.Xpf.Data.GridFilterCriteriaToExpressionConverter<EFCoreIssues.Issues.Issue>();
             return converter.Convert(filter);
+        }
+
+        void LoadLookupData() {
+            var context = new EFCoreIssues.Issues.IssuesContext();
+            usersLookup.ItemsSource = context.Users.Select(user => new { Id = user.Id, Name = user.FirstName + " " + user.LastName }).ToArray();
         }
     }
 }

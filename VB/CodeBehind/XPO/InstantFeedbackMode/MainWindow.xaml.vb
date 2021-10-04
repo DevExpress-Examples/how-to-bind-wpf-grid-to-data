@@ -16,6 +16,15 @@ Class MainWindow
         Dim source = New DevExpress.Xpo.XPInstantFeedbackView(GetType(Issues.Issue), properties, Nothing)
         AddHandler source.ResolveSession, Sub(o, e) e.Session = New DevExpress.Xpo.Session()
         grid.ItemsSource = source
+        LoadLookupData()
+    End Sub
+
+    Private Sub LoadLookupData()
+        Dim session = New DevExpress.Xpo.Session()
+        usersLookup.ItemsSource = session.Query(Of XPOIssues.Issues.User).OrderBy(Function(user) user.Oid).[Select](Function(user) New With {
+            .Id = user.Oid,
+            .Name = user.FirstName & " " + user.LastName
+        }).ToArray()
     End Sub
 
 End Class
