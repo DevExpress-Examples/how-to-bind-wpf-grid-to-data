@@ -7,7 +7,7 @@
       <dxg:GridControl.ItemsSource>
         <dx:InfiniteAsyncSource CustomProperties="{Binding Properties}" KeyProperty="Oid" FetchRowsCommand="{Binding FetchRowsCommand}" GetTotalSummariesCommand="{Binding GetTotalSummariesCommand}" />
       </dxg:GridControl.ItemsSource>
-      <dxg:GridColumn FieldName="Oid" IsSmart="True" />
+      <dxg:GridColumn FieldName="Oid" IsSmart="True" ReadOnly="True" />
       <dxg:GridColumn FieldName="Subject" IsSmart="True" />
       <dxg:GridColumn FieldName="UserId" IsSmart="True" Header="User">
         <dxg:GridColumn.EditSettings>
