@@ -1,15 +1,23 @@
-<Window x:Class="EFCoreIssues.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:EFCoreIssues" xmlns:local_issues="clr-namespace:EFCoreIssues.Issues" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" mc:Ignorable="d" Title="MainWindow" Height="450" Width="800">
-  <Grid>
-    <dxg:GridControl x:Name="grid">
-      <dxg:GridControl.View>
-        <dxg:TableView ShowFixedTotalSummary="True" />
-      </dxg:GridControl.View>
-      <dxg:GridColumn FieldName="Id" IsSmart="True" ReadOnly="True" />
-      <dxg:GridColumn FieldName="FirstName" IsSmart="True" />
-      <dxg:GridColumn FieldName="LastName" IsSmart="True" />
-      <dxg:GridControl.TotalSummary>
-        <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
-      </dxg:GridControl.TotalSummary>
-    </dxg:GridControl>
-  </Grid>
+﻿<Window x:Class="EFCoreIssues.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EFCoreIssues"
+        xmlns:local_issues="clr-namespace:EFCoreIssues.Issues" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450"
+        Width="800">
+    <Grid>
+        <dxg:GridControl x:Name="grid">
+            <dxg:GridControl.View>
+                <dxg:TableView ShowFixedTotalSummary="True" />
+            </dxg:GridControl.View>
+            <dxg:GridColumn FieldName="Id"
+                            IsSmart="True" ReadOnly="True" />
+            <dxg:GridColumn FieldName="FirstName" IsSmart="True" />
+            <dxg:GridColumn FieldName="LastName" IsSmart="True" />
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+            </dxg:GridControl.TotalSummary>
+        </dxg:GridControl>
+    </Grid>
 </Window>
