@@ -5,6 +5,9 @@
         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
         mc:Ignorable="d" Title="MainWindow"
         Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainViewModel />
+    </Window.DataContext>
     <Grid>
         <dxg:GridControl x:Name="grid">
             <dxg:GridControl.View>
@@ -32,7 +35,4 @@
             </dxg:GridControl.TotalSummary>
         </dxg:GridControl>
     </Grid>
-    <Window.DataContext>
-        <local:MainViewModel />
-    </Window.DataContext>
 </Window>
