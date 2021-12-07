@@ -19,6 +19,14 @@ The example includes multiple solutions that demonstrate:
 
 **See also**: [Implement CRUD Operations in a Data-Bound Grid](https://github.com/DevExpress-Examples/how-to-implement-crud-operations)
 
+## Building Issues
+
+If you build the **.NET 5** app and then try to build the **.NET Framework** app, the following error occurs:
+
+``Your project does not reference '.NETFramework, Version = v4.7.2' framework. Add a reference to '.NETFramework,Version = v4.7.2' in the 'TargetFrameworks' property of your project file and then re-run NuGet restore.``
+
+To fix this issue, remove the **obj** folder from the app.
+
 ## Files to Look At
 
 ### C#
