@@ -1,4 +1,6 @@
 using System.Windows;
+using EFCoreIssues.Issues;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace EFCoreIssues {
@@ -7,10 +9,10 @@ namespace EFCoreIssues {
             InitializeComponent();
             LoadData();
         }
-        EFCoreIssues.Issues.IssuesContext _Context;
+        IssuesContext _Context;
 
         void LoadData() {
-            _Context = new EFCoreIssues.Issues.IssuesContext();
+            _Context = new IssuesContext();
             grid.ItemsSource = _Context.Users.ToList();
         }
     }

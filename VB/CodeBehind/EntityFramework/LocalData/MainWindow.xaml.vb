@@ -1,13 +1,15 @@
+Imports EntityFrameworkIssues.Issues
+Imports System.Data.Entity
 Imports System.Linq
 Class MainWindow
     Public Sub New()
         InitializeComponent()
         LoadData()
     End Sub
-    Private _Context As Issues.IssuesContext
+    Private _Context As IssuesContext
 
     Private Sub LoadData()
-        _Context = New Issues.IssuesContext()
+        _Context = New IssuesContext()
         grid.ItemsSource = _Context.Users.ToList()
     End Sub
 

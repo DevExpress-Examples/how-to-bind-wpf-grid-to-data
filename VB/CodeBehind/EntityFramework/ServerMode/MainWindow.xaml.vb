@@ -1,13 +1,14 @@
+Imports EntityFrameworkIssues.Issues
+Imports System.Data.Entity
 Imports DevExpress.Xpf.Data
 Imports System.Linq
 Imports System.Threading.Tasks
-Imports System.Data.Entity
 Class MainWindow
     Public Sub New()
         InitializeComponent()
-        Dim context = New Issues.IssuesContext()
+        Dim context = New IssuesContext()
         Dim source = New DevExpress.Data.Linq.EntityServerModeSource With {
-            .KeyExpression = NameOf(Issues.Issue.Id),
+            .KeyExpression = NameOf(Issue.Id),
             .QueryableSource = context.Issues.AsNoTracking()
         }
         grid.ItemsSource = source

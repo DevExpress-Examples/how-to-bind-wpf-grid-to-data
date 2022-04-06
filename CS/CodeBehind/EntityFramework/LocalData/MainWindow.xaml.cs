@@ -1,4 +1,6 @@
 using System.Windows;
+using EntityFrameworkIssues.Issues;
+using System.Data.Entity;
 using System.Linq;
 
 namespace EntityFrameworkIssues {
@@ -7,10 +9,10 @@ namespace EntityFrameworkIssues {
             InitializeComponent();
             LoadData();
         }
-        EntityFrameworkIssues.Issues.IssuesContext _Context;
+        IssuesContext _Context;
 
         void LoadData() {
-            _Context = new EntityFrameworkIssues.Issues.IssuesContext();
+            _Context = new IssuesContext();
             grid.ItemsSource = _Context.Users.ToList();
         }
     }

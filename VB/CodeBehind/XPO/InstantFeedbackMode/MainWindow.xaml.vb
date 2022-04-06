@@ -1,20 +1,20 @@
+Imports XPOIssues.Issues
+Imports DevExpress.Xpo
 Imports DevExpress.Xpf.Data
 Imports System.Linq
 Imports System.Threading.Tasks
-Imports DevExpress.Xpo
-Imports DevExpress.Data.Filtering
 Class MainWindow
     Public Sub New()
         InitializeComponent()
         Dim properties = New ServerViewProperty() {
-        New ServerViewProperty("Oid", SortDirection.Ascending, New OperandProperty("Oid")),
-        New ServerViewProperty("Subject", SortDirection.None, New OperandProperty("Subject")),
-        New ServerViewProperty("UserId", SortDirection.None, New OperandProperty("UserId")),
-        New ServerViewProperty("Created", SortDirection.None, New OperandProperty("Created")),
-        New ServerViewProperty("Votes", SortDirection.None, New OperandProperty("Votes")),
-        New ServerViewProperty("Priority", SortDirection.None, New OperandProperty("Priority"))
+        New ServerViewProperty("Subject", SortDirection.None, New DevExpress.Data.Filtering.OperandProperty("Subject")),
+        New ServerViewProperty("UserId", SortDirection.None, New DevExpress.Data.Filtering.OperandProperty("UserId")),
+        New ServerViewProperty("Created", SortDirection.None, New DevExpress.Data.Filtering.OperandProperty("Created")),
+        New ServerViewProperty("Votes", SortDirection.None, New DevExpress.Data.Filtering.OperandProperty("Votes")),
+        New ServerViewProperty("Priority", SortDirection.None, New DevExpress.Data.Filtering.OperandProperty("Priority")),
+        New ServerViewProperty("Oid", SortDirection.Ascending, New DevExpress.Data.Filtering.OperandProperty("Oid"))
         }
-        Dim source = New XPInstantFeedbackView(GetType(Issues.Issue), properties, Nothing)
+        Dim source = New XPInstantFeedbackView(GetType(Issue), properties, Nothing)
         AddHandler source.ResolveSession, Sub(o, e) e.Session = New Session()
         grid.ItemsSource = source
         LoadLookupData()

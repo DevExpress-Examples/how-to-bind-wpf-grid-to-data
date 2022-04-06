@@ -1,4 +1,6 @@
 using System.Windows;
+using XPOIssues.Issues;
+using DevExpress.Xpo;
 using System.Linq;
 
 namespace XPOIssues {
@@ -7,12 +9,12 @@ namespace XPOIssues {
             InitializeComponent();
             LoadData();
         }
-        DevExpress.Xpo.UnitOfWork _UnitOfWork;
+        UnitOfWork _UnitOfWork;
 
         void LoadData() {
-            _UnitOfWork = new DevExpress.Xpo.UnitOfWork();
-            var xpCollection = new DevExpress.Xpo.XPCollection<XPOIssues.Issues.User>(_UnitOfWork);
-            xpCollection.Sorting.Add(new DevExpress.Xpo.SortProperty(nameof(XPOIssues.Issues.User.Oid), DevExpress.Xpo.DB.SortingDirection.Ascending));
+            _UnitOfWork = new UnitOfWork();
+            var xpCollection = new XPCollection<User>(_UnitOfWork);
+            xpCollection.Sorting.Add(new SortProperty(nameof(User.Oid), DevExpress.Xpo.DB.SortingDirection.Ascending));
             grid.ItemsSource = xpCollection;
         }
     }

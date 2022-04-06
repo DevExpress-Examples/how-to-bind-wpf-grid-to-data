@@ -1,8 +1,9 @@
 using System.Windows;
+using EFCoreIssues.Issues;
+using Microsoft.EntityFrameworkCore;
 using DevExpress.Xpf.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace EFCoreIssues {
     public partial class MainWindow : Window {
@@ -10,11 +11,11 @@ namespace EFCoreIssues {
             InitializeComponent();
             var source = new DevExpress.Data.Linq.EntityInstantFeedbackSource
             {
-                KeyExpression = nameof(EFCoreIssues.Issues.Issue.Id)
+                KeyExpression = nameof(Issue.Id)
             };
             source.GetQueryable += (sender, e) =>
             {
-                var context = new EFCoreIssues.Issues.IssuesContext();
+                var context = new IssuesContext();
                 e.QueryableSource = context.Issues.AsNoTracking();
             };
             grid.ItemsSource = source;
