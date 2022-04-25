@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using EFCoreIssues.Issues;
 using Microsoft.EntityFrameworkCore;
 using DevExpress.Xpf.Data;
@@ -9,8 +9,7 @@ namespace EFCoreIssues {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
-            var source = new PagedAsyncSource
-            {
+            var source = new PagedAsyncSource {
                 ElementType = typeof(Issue),
                 KeyProperty = nameof(Issue.Id),
                 PageNavigationMode = PageNavigationMode.ArbitraryWithTotalPageCount
@@ -25,10 +24,10 @@ namespace EFCoreIssues {
             var converter = new DevExpress.Xpf.Data.GridFilterCriteriaToExpressionConverter<Issue>();
             return converter.Convert(filter);
         }
+
         void OnFetchPage(object sender, FetchPageAsyncEventArgs e) {
             const int pageTakeCount = 5;
-            e.Result = Task.Run<DevExpress.Xpf.Data.FetchRowsResult>(() =>
-            {
+            e.Result = Task.Run<DevExpress.Xpf.Data.FetchRowsResult>(() => {
                 var context = new IssuesContext();
                 var queryable = context.Issues.AsNoTracking()
                     .SortBy(e.SortOrder, defaultUniqueSortPropertyName: nameof(Issue.Id))
@@ -36,14 +35,15 @@ namespace EFCoreIssues {
                 return queryable.Skip(e.Skip).Take(e.Take * pageTakeCount).ToArray();
             });
         }
+
         void OnGetTotalSummaries(object sender, GetSummariesAsyncEventArgs e) {
-            e.Result = Task.Run(() =>
-            {
+            e.Result = Task.Run(() => {
                 var context = new IssuesContext();
                 var queryable = context.Issues.Where(MakeFilterExpression(e.Filter));
                 return queryable.GetSummaries(e.Summaries);
             });
         }
+
         void LoadLookupData() {
             var context = new EFCoreIssues.Issues.IssuesContext();
             usersLookup.ItemsSource = context.Users.Select(user => new { Id = user.Id, Name = user.FirstName + " " + user.LastName }).ToArray();

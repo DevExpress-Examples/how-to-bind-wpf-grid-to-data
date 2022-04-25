@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using EntityFrameworkIssues.Issues;
 using System.Data.Entity;
 using System.Linq;

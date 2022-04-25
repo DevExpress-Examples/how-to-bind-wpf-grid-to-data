@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using XPOIssues.Issues;
 using DevExpress.Xpo;
 using DevExpress.Xpf.Data;

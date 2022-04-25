@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using EntityFrameworkIssues.Issues;
 using System.Data.Entity;
 using DevExpress.Xpf.Data;
@@ -10,8 +10,7 @@ namespace EntityFrameworkIssues {
         public MainWindow() {
             InitializeComponent();
             var context = new IssuesContext();
-            var source = new DevExpress.Data.Linq.EntityServerModeSource
-            {
+            var source = new DevExpress.Data.Linq.EntityServerModeSource {
                 KeyExpression = nameof(Issue.Id),
                 QueryableSource = context.Issues.AsNoTracking()
             };

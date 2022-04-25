@@ -1,4 +1,4 @@
-using DevExpress.Mvvm;
+﻿using DevExpress.Mvvm;
 using XPOIssues.Issues;
 using DevExpress.Xpo;
 using DevExpress.Mvvm.DataAnnotations;
@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 namespace XPOIssues {
     public class MainViewModel : ViewModelBase {
         XPServerModeView _ItemsSource;
-        public XPServerModeView ItemsSource
-        {
+        public XPServerModeView ItemsSource {
             get
             {
                 if(_ItemsSource == null) {
@@ -30,8 +29,7 @@ new ServerViewProperty("Oid", SortDirection.Ascending, new DevExpress.Data.Filte
             }
         }
         System.Collections.IList _Users;
-        public System.Collections.IList Users
-        {
+        public System.Collections.IList Users {
             get
             {
                 if(_Users == null && !DevExpress.Mvvm.ViewModelBase.IsInDesignMode) {

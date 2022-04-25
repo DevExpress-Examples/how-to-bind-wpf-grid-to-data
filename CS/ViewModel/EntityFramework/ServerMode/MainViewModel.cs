@@ -1,4 +1,4 @@
-using DevExpress.Mvvm;
+﻿using DevExpress.Mvvm;
 using EntityFrameworkIssues.Issues;
 using System.Data.Entity;
 using DevExpress.Mvvm.DataAnnotations;
@@ -9,14 +9,12 @@ using System.Threading.Tasks;
 namespace EntityFrameworkIssues {
     public class MainViewModel : ViewModelBase {
         DevExpress.Data.Linq.EntityServerModeSource _ItemsSource;
-        public DevExpress.Data.Linq.EntityServerModeSource ItemsSource
-        {
+        public DevExpress.Data.Linq.EntityServerModeSource ItemsSource {
             get
             {
                 if(_ItemsSource == null) {
                     var context = new IssuesContext();
-                    _ItemsSource = new DevExpress.Data.Linq.EntityServerModeSource
-                    {
+                    _ItemsSource = new DevExpress.Data.Linq.EntityServerModeSource {
                         KeyExpression = nameof(Issue.Id),
                         QueryableSource = context.Issues.AsNoTracking()
                     };
@@ -25,8 +23,7 @@ namespace EntityFrameworkIssues {
             }
         }
         System.Collections.IList _Users;
-        public System.Collections.IList Users
-        {
+        public System.Collections.IList Users {
             get
             {
                 if(_Users == null && !DevExpress.Mvvm.ViewModelBase.IsInDesignMode) {

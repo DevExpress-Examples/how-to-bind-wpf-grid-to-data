@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using XPOIssues.Issues;
 using DevExpress.Xpo;
 using DevExpress.Xpf.Data;
@@ -18,8 +18,7 @@ new ServerViewProperty("Priority", SortDirection.None, new DevExpress.Data.Filte
 new ServerViewProperty("Oid", SortDirection.Ascending, new DevExpress.Data.Filtering.OperandProperty("Oid"))
 };
             var source = new XPInstantFeedbackView(typeof(Issue), properties, null);
-            source.ResolveSession += (o, e) =>
-            {
+            source.ResolveSession += (o, e) => {
                 e.Session = new Session();
             };
             grid.ItemsSource = source;
