@@ -1,5 +1,4 @@
 ﻿Imports EntityFrameworkIssues.Issues
-Imports System.Data.Entity
 Imports System.Linq
 Class MainWindow
     Public Sub New()

@@ -1,19 +1,19 @@
 ﻿Imports DevExpress.Mvvm
 Imports EFCoreIssues.Issues
-Imports Microsoft.EntityFrameworkCore
 Imports DevExpress.Mvvm.DataAnnotations
-Imports DevExpress.Xpf.Data
+Imports DevExpress.Data.Linq
+Imports Microsoft.EntityFrameworkCore
 Imports System.Linq
-Imports System.Threading.Tasks
+Imports System.Collections
 
 Public Class MainViewModel
     Inherits ViewModelBase
-    Private _ItemsSource As DevExpress.Data.Linq.EntityServerModeSource
-    Public ReadOnly Property ItemsSource As DevExpress.Data.Linq.EntityServerModeSource
+    Private _ItemsSource As EntityServerModeSource
+    Public ReadOnly Property ItemsSource As EntityServerModeSource
         Get
             If _ItemsSource Is Nothing Then
                 Dim context = New IssuesContext()
-                _ItemsSource = New DevExpress.Data.Linq.EntityServerModeSource With {
+                _ItemsSource = New EntityServerModeSource With {
                     .KeyExpression = NameOf(Issue.Id),
                     .QueryableSource = context.Issues.AsNoTracking()
                 }
@@ -21,11 +21,11 @@ Public Class MainViewModel
             Return _ItemsSource
         End Get
     End Property
-    Private _Users As System.Collections.IList
-    Public ReadOnly Property Users As System.Collections.IList
+    Private _Users As IList
+    Public ReadOnly Property Users As IList
         Get
             If _Users Is Nothing AndAlso Not DevExpress.Mvvm.ViewModelBase.IsInDesignMode Then
-                Dim context = New EFCoreIssues.Issues.IssuesContext()
+                Dim context = New IssuesContext()
                 _Users = context.Users.[Select](Function(user) New With {
                     .Id = user.Id,
                     .Name = user.FirstName & " " + user.LastName

@@ -1,16 +1,16 @@
 ﻿using System.Windows;
 using EntityFrameworkIssues.Issues;
+using DevExpress.Data.Linq;
 using System.Data.Entity;
-using DevExpress.Xpf.Data;
 using System.Linq;
-using System.Threading.Tasks;
+using DevExpress.Xpf.Grid;
 
 namespace EntityFrameworkIssues {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
             var context = new IssuesContext();
-            var source = new DevExpress.Data.Linq.EntityServerModeSource {
+            var source = new EntityServerModeSource {
                 KeyExpression = nameof(Issue.Id),
                 QueryableSource = context.Issues.AsNoTracking()
             };
@@ -19,7 +19,7 @@ namespace EntityFrameworkIssues {
         }
 
         void LoadLookupData() {
-            var context = new EntityFrameworkIssues.Issues.IssuesContext();
+            var context = new IssuesContext();
             usersLookup.ItemsSource = context.Users.Select(user => new { Id = user.Id, Name = user.FirstName + " " + user.LastName }).ToArray();
         }
     }

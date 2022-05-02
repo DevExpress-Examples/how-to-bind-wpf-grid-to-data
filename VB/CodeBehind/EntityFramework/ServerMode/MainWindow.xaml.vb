@@ -1,13 +1,13 @@
 ﻿Imports EntityFrameworkIssues.Issues
+Imports DevExpress.Data.Linq
 Imports System.Data.Entity
-Imports DevExpress.Xpf.Data
 Imports System.Linq
-Imports System.Threading.Tasks
+Imports DevExpress.Xpf.Grid
 Class MainWindow
     Public Sub New()
         InitializeComponent()
         Dim context = New IssuesContext()
-        Dim source = New DevExpress.Data.Linq.EntityServerModeSource With {
+        Dim source = New EntityServerModeSource With {
             .KeyExpression = NameOf(Issue.Id),
             .QueryableSource = context.Issues.AsNoTracking()
         }
@@ -16,7 +16,7 @@ Class MainWindow
     End Sub
 
     Private Sub LoadLookupData()
-        Dim context = New EntityFrameworkIssues.Issues.IssuesContext()
+        Dim context = New IssuesContext()
         usersLookup.ItemsSource = context.Users.[Select](Function(user) New With {
             .Id = user.Id,
             .Name = user.FirstName & " " + user.LastName

@@ -1,12 +1,12 @@
 ﻿Imports EFCoreIssues.Issues
+Imports DevExpress.Data.Linq
 Imports Microsoft.EntityFrameworkCore
-Imports DevExpress.Xpf.Data
 Imports System.Linq
-Imports System.Threading.Tasks
+Imports DevExpress.Xpf.Grid
 Class MainWindow
     Public Sub New()
         InitializeComponent()
-        Dim source = New DevExpress.Data.Linq.EntityInstantFeedbackSource With {
+        Dim source = New EntityInstantFeedbackSource With {
             .KeyExpression = NameOf(Issue.Id)
         }
         AddHandler source.GetQueryable, Sub(sender, e)
@@ -18,7 +18,7 @@ Class MainWindow
     End Sub
 
     Private Sub LoadLookupData()
-        Dim context = New EFCoreIssues.Issues.IssuesContext()
+        Dim context = New IssuesContext()
         usersLookup.ItemsSource = context.Users.[Select](Function(user) New With {
             .Id = user.Id,
             .Name = user.FirstName & " " + user.LastName

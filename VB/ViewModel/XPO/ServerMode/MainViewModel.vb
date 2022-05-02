@@ -1,10 +1,10 @@
 ﻿Imports DevExpress.Mvvm
 Imports XPOIssues.Issues
-Imports DevExpress.Xpo
 Imports DevExpress.Mvvm.DataAnnotations
-Imports DevExpress.Xpf.Data
+Imports DevExpress.Data.Filtering
+Imports DevExpress.Xpo
 Imports System.Linq
-Imports System.Threading.Tasks
+Imports System.Collections
 
 Public Class MainViewModel
     Inherits ViewModelBase
@@ -13,12 +13,12 @@ Public Class MainViewModel
         Get
             If _ItemsSource Is Nothing Then
                 Dim properties = New ServerViewProperty() {
-            New ServerViewProperty("Subject", SortDirection.None, New DevExpress.Data.Filtering.OperandProperty("Subject")),
-            New ServerViewProperty("UserId", SortDirection.None, New DevExpress.Data.Filtering.OperandProperty("UserId")),
-            New ServerViewProperty("Created", SortDirection.None, New DevExpress.Data.Filtering.OperandProperty("Created")),
-            New ServerViewProperty("Votes", SortDirection.None, New DevExpress.Data.Filtering.OperandProperty("Votes")),
-            New ServerViewProperty("Priority", SortDirection.None, New DevExpress.Data.Filtering.OperandProperty("Priority")),
-            New ServerViewProperty("Oid", SortDirection.Ascending, New DevExpress.Data.Filtering.OperandProperty("Oid"))
+            New ServerViewProperty("Subject", SortDirection.None, New OperandProperty("Subject")),
+            New ServerViewProperty("UserId", SortDirection.None, New OperandProperty("UserId")),
+            New ServerViewProperty("Created", SortDirection.None, New OperandProperty("Created")),
+            New ServerViewProperty("Votes", SortDirection.None, New OperandProperty("Votes")),
+            New ServerViewProperty("Priority", SortDirection.None, New OperandProperty("Priority")),
+            New ServerViewProperty("Oid", SortDirection.Ascending, New OperandProperty("Oid"))
                 }
                 Dim session = New Session()
                 _ItemsSource = New XPServerModeView(session, GetType(Issue), Nothing)
@@ -28,12 +28,12 @@ Public Class MainViewModel
             Return _ItemsSource
         End Get
     End Property
-    Private _Users As System.Collections.IList
-    Public ReadOnly Property Users As System.Collections.IList
+    Private _Users As IList
+    Public ReadOnly Property Users As IList
         Get
             If _Users Is Nothing AndAlso Not DevExpress.Mvvm.ViewModelBase.IsInDesignMode Then
-                Dim session = New DevExpress.Xpo.Session()
-                _Users = session.Query(Of XPOIssues.Issues.User).OrderBy(Function(user) user.Oid).[Select](Function(user) New With {
+                Dim session = New Session()
+                _Users = session.Query(Of User).OrderBy(Function(user) user.Oid).[Select](Function(user) New With {
                     .Id = user.Oid,
                     .Name = user.FirstName & " " + user.LastName
                 }).ToArray()

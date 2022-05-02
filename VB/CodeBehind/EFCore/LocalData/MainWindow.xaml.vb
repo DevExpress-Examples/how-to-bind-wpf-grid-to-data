@@ -1,5 +1,4 @@
 ﻿Imports EFCoreIssues.Issues
-Imports Microsoft.EntityFrameworkCore
 Imports System.Linq
 Class MainWindow
     Public Sub New()

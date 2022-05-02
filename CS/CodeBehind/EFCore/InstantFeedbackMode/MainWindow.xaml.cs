@@ -1,15 +1,15 @@
 ﻿using System.Windows;
 using EFCoreIssues.Issues;
+using DevExpress.Data.Linq;
 using Microsoft.EntityFrameworkCore;
-using DevExpress.Xpf.Data;
 using System.Linq;
-using System.Threading.Tasks;
+using DevExpress.Xpf.Grid;
 
 namespace EFCoreIssues {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
-            var source = new DevExpress.Data.Linq.EntityInstantFeedbackSource {
+            var source = new EntityInstantFeedbackSource {
                 KeyExpression = nameof(Issue.Id)
             };
             source.GetQueryable += (sender, e) => {
@@ -21,7 +21,7 @@ namespace EFCoreIssues {
         }
 
         void LoadLookupData() {
-            var context = new EFCoreIssues.Issues.IssuesContext();
+            var context = new IssuesContext();
             usersLookup.ItemsSource = context.Users.Select(user => new { Id = user.Id, Name = user.FirstName + " " + user.LastName }).ToArray();
         }
     }

@@ -1,9 +1,13 @@
 ﻿using System.Windows;
 using EFCoreIssues.Issues;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq.Expressions;
+using DevExpress.Data.Filtering;
 using DevExpress.Xpf.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using DevExpress.Xpf.Grid;
 
 namespace EFCoreIssues {
     public partial class MainWindow : Window {
@@ -19,13 +23,13 @@ namespace EFCoreIssues {
             LoadLookupData();
         }
 
-        System.Linq.Expressions.Expression<System.Func<Issue, bool>> MakeFilterExpression(DevExpress.Data.Filtering.CriteriaOperator filter) {
-            var converter = new DevExpress.Xpf.Data.GridFilterCriteriaToExpressionConverter<Issue>();
+        Expression<Func<Issue, bool>> MakeFilterExpression(CriteriaOperator filter) {
+            var converter = new GridFilterCriteriaToExpressionConverter<Issue>();
             return converter.Convert(filter);
         }
 
         void OnFetchRows(object sender, FetchRowsAsyncEventArgs e) {
-            e.Result = Task.Run<DevExpress.Xpf.Data.FetchRowsResult>(() => {
+            e.Result = Task.Run<FetchRowsResult>(() => {
                 var context = new IssuesContext();
                 var queryable = context.Issues.AsNoTracking()
                     .SortBy(e.SortOrder, defaultUniqueSortPropertyName: nameof(Issue.Id))
@@ -43,7 +47,7 @@ namespace EFCoreIssues {
         }
 
         void LoadLookupData() {
-            var context = new EFCoreIssues.Issues.IssuesContext();
+            var context = new IssuesContext();
             usersLookup.ItemsSource = context.Users.Select(user => new { Id = user.Id, Name = user.FirstName + " " + user.LastName }).ToArray();
         }
     }
