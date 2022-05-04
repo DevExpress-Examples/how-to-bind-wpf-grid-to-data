@@ -33,12 +33,12 @@ Class MainWindow
 
     Private Sub OnFetchRows(ByVal sender As Object, ByVal e As FetchRowsAsyncEventArgs)
         e.Result = Task.Run(Of FetchRowsResult)(Function()
-                                                    Using session = New Session()
-                                                        Dim queryable = session.Query(Of Issue)().SortBy(e.SortOrder, defaultUniqueSortPropertyName:=NameOf(Issue.Oid)).Where(MakeFilterExpression(e.Filter))
-                                                        Dim items = queryable.Skip(e.Skip).Take(If(e.Take, 100)).ToArray()
-                                                        Return _DetachedObjectsHelper.ConvertToDetachedObjects(items)
-                                                    End Using
-                                                End Function)
+            Using session = New Session()
+                Dim queryable = session.Query(Of Issue)().SortBy(e.SortOrder, defaultUniqueSortPropertyName:=NameOf(Issue.Oid)).Where(MakeFilterExpression(e.Filter))
+                Dim items = queryable.Skip(e.Skip).Take(If(e.Take, 100)).ToArray()
+                Return _DetachedObjectsHelper.ConvertToDetachedObjects(items)
+            End Using
+        End Function)
     End Sub
 
     Private Sub OnGetTotalSummaries(ByVal sender As Object, ByVal e As GetSummariesAsyncEventArgs)
