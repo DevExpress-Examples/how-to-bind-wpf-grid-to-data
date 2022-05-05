@@ -1,4 +1,4 @@
-﻿Imports XPOIssues.Issues
+Imports XPOIssues.Issues
 Imports DevExpress.Data.Filtering
 Imports DevExpress.Xpo
 Imports System.Linq
@@ -7,12 +7,12 @@ Class MainWindow
     Public Sub New()
         InitializeComponent()
         Dim properties = New ServerViewProperty() {
-        New ServerViewProperty("Subject", SortDirection.None, New OperandProperty("Subject")),
-        New ServerViewProperty("UserId", SortDirection.None, New OperandProperty("UserId")),
-        New ServerViewProperty("Created", SortDirection.None, New OperandProperty("Created")),
-        New ServerViewProperty("Votes", SortDirection.None, New OperandProperty("Votes")),
-        New ServerViewProperty("Priority", SortDirection.None, New OperandProperty("Priority")),
-        New ServerViewProperty("Oid", SortDirection.Ascending, New OperandProperty("Oid"))
+            New ServerViewProperty("Subject", SortDirection.None, New OperandProperty("Subject")),
+            New ServerViewProperty("UserId", SortDirection.None, New OperandProperty("UserId")),
+            New ServerViewProperty("Created", SortDirection.None, New OperandProperty("Created")),
+            New ServerViewProperty("Votes", SortDirection.None, New OperandProperty("Votes")),
+            New ServerViewProperty("Priority", SortDirection.None, New OperandProperty("Priority")),
+            New ServerViewProperty("Oid", SortDirection.Ascending, New OperandProperty("Oid"))
         }
         Dim source = New XPInstantFeedbackView(GetType(Issue), properties, Nothing)
         AddHandler source.ResolveSession, Sub(o, e) e.Session = New Session()
