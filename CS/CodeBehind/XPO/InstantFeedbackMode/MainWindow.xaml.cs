@@ -10,13 +10,13 @@ namespace XPOIssues {
         public MainWindow() {
             InitializeComponent();
             var properties = new ServerViewProperty[] {
-new ServerViewProperty("Subject", SortDirection.None, new OperandProperty("Subject")),
-new ServerViewProperty("UserId", SortDirection.None, new OperandProperty("UserId")),
-new ServerViewProperty("Created", SortDirection.None, new OperandProperty("Created")),
-new ServerViewProperty("Votes", SortDirection.None, new OperandProperty("Votes")),
-new ServerViewProperty("Priority", SortDirection.None, new OperandProperty("Priority")),
-new ServerViewProperty("Oid", SortDirection.Ascending, new OperandProperty("Oid"))
-};
+                new ServerViewProperty("Subject", SortDirection.None, new OperandProperty("Subject")),
+                new ServerViewProperty("UserId", SortDirection.None, new OperandProperty("UserId")),
+                new ServerViewProperty("Created", SortDirection.None, new OperandProperty("Created")),
+                new ServerViewProperty("Votes", SortDirection.None, new OperandProperty("Votes")),
+                new ServerViewProperty("Priority", SortDirection.None, new OperandProperty("Priority")),
+                new ServerViewProperty("Oid", SortDirection.Ascending, new OperandProperty("Oid"))
+                };
             var source = new XPInstantFeedbackView(typeof(Issue), properties, null);
             source.ResolveSession += (o, e) => {
                 e.Session = new Session();
