@@ -7,12 +7,12 @@ Class MainWindow
     Public Sub New()
         InitializeComponent()
         Dim properties = New ServerViewProperty() {
-        New ServerViewProperty("Subject", SortDirection.None, New OperandProperty("Subject")),
-        New ServerViewProperty("UserId", SortDirection.None, New OperandProperty("UserId")),
-        New ServerViewProperty("Created", SortDirection.None, New OperandProperty("Created")),
-        New ServerViewProperty("Votes", SortDirection.None, New OperandProperty("Votes")),
-        New ServerViewProperty("Priority", SortDirection.None, New OperandProperty("Priority")),
-        New ServerViewProperty("Oid", SortDirection.Ascending, New OperandProperty("Oid"))
+            New ServerViewProperty("Subject", SortDirection.None, New OperandProperty("Subject")),
+            New ServerViewProperty("UserId", SortDirection.None, New OperandProperty("UserId")),
+            New ServerViewProperty("Created", SortDirection.None, New OperandProperty("Created")),
+            New ServerViewProperty("Votes", SortDirection.None, New OperandProperty("Votes")),
+            New ServerViewProperty("Priority", SortDirection.None, New OperandProperty("Priority")),
+            New ServerViewProperty("Oid", SortDirection.Ascending, New OperandProperty("Oid"))
         }
         Dim session = New Session()
         Dim source = New XPServerModeView(session, GetType(Issue), Nothing)
