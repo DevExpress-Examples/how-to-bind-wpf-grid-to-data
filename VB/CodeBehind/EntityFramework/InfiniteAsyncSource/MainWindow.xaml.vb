@@ -27,10 +27,10 @@ Class MainWindow
 
     Private Sub OnFetchRows(ByVal sender As Object, ByVal e As FetchRowsAsyncEventArgs)
         e.Result = Task.Run(Of FetchRowsResult)(Function()
-                                                    Dim context = New IssuesContext()
-                                                    Dim queryable = context.Issues.AsNoTracking().SortBy(e.SortOrder, defaultUniqueSortPropertyName:=NameOf(Issue.Id)).Where(MakeFilterExpression(e.Filter))
-                                                    Return queryable.Skip(e.Skip).Take(If(e.Take, 100)).ToArray()
-                                                End Function)
+            Dim context = New IssuesContext()
+            Dim queryable = context.Issues.AsNoTracking().SortBy(e.SortOrder, defaultUniqueSortPropertyName:=NameOf(Issue.Id)).Where(MakeFilterExpression(e.Filter))
+            Return queryable.Skip(e.Skip).Take(If(e.Take, 100)).ToArray()
+        End Function)
     End Sub
 
     Private Sub OnGetTotalSummaries(ByVal sender As Object, ByVal e As GetSummariesAsyncEventArgs)
